@@ -1,69 +1,70 @@
-# Flueent API - Corporate Language Learning Platform
+# Flueent API - Plataforma de Aprendizado de Idiomas Corporativo
 
-A complete backend API built with FastAPI for a B2B SaaS corporate language learning platform. The system focuses on organizing employees by departments and assigning specific learning paths to each department.
+API backend completa construída com FastAPI para uma plataforma B2B SaaS de aprendizado de idiomas corporativo. O sistema foca em organizar colaboradores por departamentos e atribuir trilhas de aprendizado específicas a cada departamento.
 
-## 🚀 Features
+## 🚀 Funcionalidades
 
-- **Multi-company Management**: Support for multiple companies with different subscription plans
-- **Department Organization**: Organize employees by departments/sectors
-- **Learning Paths**: Create and manage language learning paths with multiple content items
-- **Department-Path Association**: Link learning paths to specific departments
-- **User Enrollment**: Enroll users in learning paths with progress tracking
-- **Auto-enrollment**: Automatically enroll department users in assigned learning paths
-- **Comprehensive Reports**: Track progress by department, learning path, and company
-- **RESTful API**: Complete CRUD operations for all entities
-- **Auto-generated Documentation**: Swagger UI and OpenAPI specification
-- **Database Migrations**: Alembic support for schema versioning
+- **Gestão Multi-empresa**: Suporte a múltiplas empresas com diferentes planos de assinatura
+- **Organização por Departamentos**: Organize colaboradores por departamentos/setores
+- **Trilhas de Aprendizado**: Crie e gerencie trilhas de aprendizado de idiomas com múltiplos conteúdos
+- **Associação Departamento-Trilha**: Vincule trilhas de aprendizado a departamentos específicos
+- **Matrícula de Usuários**: Matricule usuários em trilhas com acompanhamento de progresso
+- **Matrícula Automática**: Matricule automaticamente todos os usuários de um departamento nas trilhas atribuídas
+- **Relatórios Completos**: Acompanhe o progresso por departamento, trilha e empresa
+- **API RESTful**: Operações CRUD completas para todas as entidades
+- **Documentação Automática**: Swagger UI e especificação OpenAPI
+- **Migrações de Banco**: Suporte ao Alembic para versionamento de schema
 
-## 🛠️ Tech Stack
+## 🛠️ Stack de Tecnologias
 
 - **Python 3.11+**
-- **FastAPI** - Modern web framework for building APIs
-- **SQLAlchemy** - SQL toolkit and ORM
-- **Pydantic** - Data validation using Python type annotations
-- **Alembic** - Database migration tool
-- **SQLite** - Database (easily switchable to PostgreSQL/MySQL)
-- **Uvicorn** - ASGI server
-- **python-dotenv** - Environment variable management
+- **FastAPI** - Framework web moderno para construção de APIs
+- **SQLAlchemy** - ORM e toolkit SQL
+- **Pydantic** - Validação de dados usando type annotations do Python
+- **Alembic** - Ferramenta de migração de banco de dados
+- **SQLite** - Banco de dados padrão (facilmente substituível por PostgreSQL/MySQL)
+- **Uvicorn** - Servidor ASGI
+- **python-dotenv** - Gerenciamento de variáveis de ambiente
 
-## 📋 Prerequisites
+## 📋 Pré-requisitos
 
-- Python 3.11 or higher
-- pip (Python package manager)
-- Git (for version control)
+- Python 3.11 ou superior
+- pip (gerenciador de pacotes do Python)
+- Git (para controle de versão)
 
-## 🔧 Installation
+## 🔧 Instalação
 
-### 1. Clone the repository
+### 1. Clone o repositório
 
 ```bash
-git clone <repository-url>
+git clone <url-do-repositorio>
 cd api-flueent/backend
 ```
 
-### 2. Create a virtual environment
+### 2. Crie um ambiente virtual
 
 **Windows:**
 ```bash
-python -m venv venv
-venv\Scripts\activate
+py -3.11 -m venv .venv
+.venv\Scripts\activate
 ```
 
 **Linux/Mac:**
 ```bash
-python -m venv venv
-source venv/bin/activate
+python3.11 -m venv .venv
+source .venv/bin/activate
 ```
 
-### 3. Install dependencies
+### 3. Instale as dependências
 
 ```bash
 pip install -r requirements.txt
+pip install email-validator
 ```
 
-### 4. Configure environment variables
+### 4. Configure as variáveis de ambiente
 
-The `.env` file is already configured with default values. You can modify it if needed:
+O arquivo `.env` já vem configurado com valores padrão. Altere se necessário:
 
 ```env
 DATABASE_URL=sqlite:///./flueent.db
@@ -73,234 +74,234 @@ DEBUG=True
 CORS_ORIGINS=http://localhost:3000,http://localhost:8080
 ```
 
-### 5. Seed the database
+### 5. Popular o banco de dados
 
-Populate the database with example data:
+Popule o banco com dados de exemplo:
 
 ```bash
 python -m app.utils.seed
 ```
 
-This will create:
-- 1 company (TechCorp International)
-- 4 departments (Sales, IT, HR, Marketing)
-- 6 users across different departments
-- 3 learning paths
-- Multiple content items
-- Sample enrollments with progress tracking
+Isso criará:
+- 1 empresa (TechCorp International)
+- 4 departamentos (Vendas, TI, RH, Marketing)
+- 6 usuários distribuídos entre os departamentos
+- 3 trilhas de aprendizado
+- Múltiplos itens de conteúdo
+- Matrículas de exemplo com acompanhamento de progresso
 
-## 🚀 Running the Application
+## 🚀 Executando a Aplicação
 
-### Start the development server
+### Iniciar o servidor de desenvolvimento
 
 ```bash
 python run.py
 ```
 
-Or use uvicorn directly:
+Ou usando o uvicorn diretamente:
 
 ```bash
 uvicorn app.main:app --reload
 ```
 
-The API will be available at: **http://localhost:8000**
+A API estará disponível em: **http://localhost:8000**
 
-## 📚 API Documentation
+## 📚 Documentação da API
 
-Once the server is running, you can access:
+Com o servidor rodando, acesse:
 
 - **Swagger UI**: http://localhost:8000/docs
 - **ReDoc**: http://localhost:8000/redoc
 - **OpenAPI JSON**: http://localhost:8000/openapi.json
 
-## 📡 API Endpoints
+## 📡 Endpoints da API
 
-### Core Entities
+### Entidades Principais
 
-#### Companies
-- `POST /api/v1/companies` - Create a new company
-- `GET /api/v1/companies` - List all companies
-- `GET /api/v1/companies/{id}` - Get company by ID
-- `PUT /api/v1/companies/{id}` - Update company
-- `DELETE /api/v1/companies/{id}` - Delete company
+#### Empresas
+- `POST /api/v1/companies` - Criar nova empresa
+- `GET /api/v1/companies` - Listar todas as empresas
+- `GET /api/v1/companies/{id}` - Buscar empresa por ID
+- `PUT /api/v1/companies/{id}` - Atualizar empresa
+- `DELETE /api/v1/companies/{id}` - Excluir empresa
 
-#### Departments
-- `POST /api/v1/departments` - Create a new department
-- `GET /api/v1/departments` - List all departments
-- `GET /api/v1/departments/{id}` - Get department by ID
-- `PUT /api/v1/departments/{id}` - Update department
-- `DELETE /api/v1/departments/{id}` - Delete department
-- `GET /api/v1/departments/{id}/learning-paths` - Get learning paths for department
+#### Departamentos
+- `POST /api/v1/departments` - Criar novo departamento
+- `GET /api/v1/departments` - Listar todos os departamentos
+- `GET /api/v1/departments/{id}` - Buscar departamento por ID
+- `PUT /api/v1/departments/{id}` - Atualizar departamento
+- `DELETE /api/v1/departments/{id}` - Excluir departamento
+- `GET /api/v1/departments/{id}/learning-paths` - Trilhas de aprendizado do departamento
 
-#### Users
-- `POST /api/v1/users` - Create a new user
-- `GET /api/v1/users` - List all users
-- `GET /api/v1/users/{id}` - Get user by ID
-- `PUT /api/v1/users/{id}` - Update user
-- `DELETE /api/v1/users/{id}` - Delete user
-- `GET /api/v1/users/{id}/enrollments` - Get user enrollments
+#### Usuários
+- `POST /api/v1/users` - Criar novo usuário
+- `GET /api/v1/users` - Listar todos os usuários
+- `GET /api/v1/users/{id}` - Buscar usuário por ID
+- `PUT /api/v1/users/{id}` - Atualizar usuário
+- `DELETE /api/v1/users/{id}` - Excluir usuário
+- `GET /api/v1/users/{id}/enrollments` - Matrículas do usuário
 
-#### Learning Paths
-- `POST /api/v1/learning-paths` - Create a new learning path
-- `GET /api/v1/learning-paths` - List all learning paths
-- `GET /api/v1/learning-paths/{id}` - Get learning path by ID
-- `PUT /api/v1/learning-paths/{id}` - Update learning path
-- `DELETE /api/v1/learning-paths/{id}` - Delete learning path
-- `POST /api/v1/learning-paths/{lp_id}/departments/{dept_id}` - Assign path to department
-- `DELETE /api/v1/learning-paths/{lp_id}/departments/{dept_id}` - Remove path from department
-- `GET /api/v1/learning-paths/{id}/departments` - Get departments for learning path
+#### Trilhas de Aprendizado
+- `POST /api/v1/learning-paths` - Criar nova trilha
+- `GET /api/v1/learning-paths` - Listar todas as trilhas
+- `GET /api/v1/learning-paths/{id}` - Buscar trilha por ID
+- `PUT /api/v1/learning-paths/{id}` - Atualizar trilha
+- `DELETE /api/v1/learning-paths/{id}` - Excluir trilha
+- `POST /api/v1/learning-paths/{lp_id}/departments/{dept_id}` - Vincular trilha a departamento
+- `DELETE /api/v1/learning-paths/{lp_id}/departments/{dept_id}` - Desvincular trilha de departamento
+- `GET /api/v1/learning-paths/{id}/departments` - Departamentos da trilha
 
-#### Contents
-- `POST /api/v1/contents` - Create a new content
-- `GET /api/v1/contents` - List all contents
-- `GET /api/v1/contents/{id}` - Get content by ID
-- `PUT /api/v1/contents/{id}` - Update content
-- `DELETE /api/v1/contents/{id}` - Delete content
+#### Conteúdos
+- `POST /api/v1/contents` - Criar novo conteúdo
+- `GET /api/v1/contents` - Listar todos os conteúdos
+- `GET /api/v1/contents/{id}` - Buscar conteúdo por ID
+- `PUT /api/v1/contents/{id}` - Atualizar conteúdo
+- `DELETE /api/v1/contents/{id}` - Excluir conteúdo
 
-#### Enrollments
-- `POST /api/v1/enrollments` - Create a new enrollment
-- `GET /api/v1/enrollments` - List all enrollments
-- `GET /api/v1/enrollments/{id}` - Get enrollment by ID
-- `PUT /api/v1/enrollments/{id}` - Update enrollment
-- `DELETE /api/v1/enrollments/{id}` - Delete enrollment
-- `GET /api/v1/enrollments/departments/{id}/enrollments` - Get department enrollments
-- `POST /api/v1/enrollments/departments/{id}/auto-enroll-users` - Auto-enroll department users
+#### Matrículas
+- `POST /api/v1/enrollments` - Criar nova matrícula
+- `GET /api/v1/enrollments` - Listar todas as matrículas
+- `GET /api/v1/enrollments/{id}` - Buscar matrícula por ID
+- `PUT /api/v1/enrollments/{id}` - Atualizar matrícula
+- `DELETE /api/v1/enrollments/{id}` - Excluir matrícula
+- `GET /api/v1/enrollments/departments/{id}/enrollments` - Matrículas do departamento
+- `POST /api/v1/enrollments/departments/{id}/auto-enroll-users` - Matrícula automática do departamento
 
-#### Reports
-- `GET /api/v1/reports/departments/{id}/progress` - Department progress report
-- `GET /api/v1/reports/departments/{id}/learning-paths` - Department learning paths report
-- `GET /api/v1/reports/learning-paths/{id}/users` - Learning path users report
-- `GET /api/v1/reports/company-overview` - Company overview report
+#### Relatórios
+- `GET /api/v1/reports/departments/{id}/progress` - Relatório de progresso do departamento
+- `GET /api/v1/reports/departments/{id}/learning-paths` - Trilhas do departamento
+- `GET /api/v1/reports/learning-paths/{id}/users` - Usuários por trilha
+- `GET /api/v1/reports/company-overview` - Visão geral da empresa
 
-### Utility Endpoints
+### Endpoints Utilitários
 
-- `GET /` - Root endpoint with API info
-- `GET /health` - Health check
-- `GET /stats` - General platform statistics
+- `GET /` - Endpoint raiz com informações da API
+- `GET /health` - Verificação de saúde
+- `GET /stats` - Estatísticas gerais da plataforma
 
-## 🗄️ Database Schema
+## 🗄️ Schema do Banco de Dados
 
-### Main Entities
+### Entidades Principais
 
-1. **Company** - Companies using the platform
-2. **Department** - Departments within each company
-3. **User** - Employees assigned to departments
-4. **LearningPath** - Language learning courses
-5. **LearningPathDepartment** - Association between paths and departments
-6. **Content** - Content items within learning paths
-7. **Enrollment** - User enrollments in learning paths
+1. **Company** - Empresas que utilizam a plataforma
+2. **Department** - Departamentos dentro de cada empresa
+3. **User** - Colaboradores vinculados a departamentos
+4. **LearningPath** - Cursos de aprendizado de idiomas
+5. **LearningPathDepartment** - Associação entre trilhas e departamentos
+6. **Content** - Itens de conteúdo dentro das trilhas
+7. **Enrollment** - Matrículas de usuários nas trilhas
 
-### Key Relationships
+### Relacionamentos
 
-- Company → Departments (1:N)
-- Company → Users (1:N)
-- Company → Learning Paths (1:N)
-- Department → Users (1:N)
-- Learning Path → Contents (1:N)
-- Learning Path ↔ Departments (N:M)
-- User ↔ Learning Paths (N:M through Enrollments)
+- Empresa → Departamentos (1:N)
+- Empresa → Usuários (1:N)
+- Empresa → Trilhas de Aprendizado (1:N)
+- Departamento → Usuários (1:N)
+- Trilha → Conteúdos (1:N)
+- Trilha ↔ Departamentos (N:M)
+- Usuário ↔ Trilhas (N:M via Matrículas)
 
-## 🔒 Business Rules & Validations
+## 🔒 Regras de Negócio e Validações
 
-- User email must be unique
-- User must belong to a department (required)
-- Department must belong to the same company as the user
-- Learning path must belong to the same company as the department when linking
-- Progress must be between 0 and 100
-- Duplicate links between learning path and department are prevented
-- Duplicate enrollments for the same user and learning path are prevented
+- E-mail do usuário deve ser único
+- Usuário deve pertencer a um departamento (obrigatório)
+- Departamento deve pertencer à mesma empresa do usuário
+- Trilha deve pertencer à mesma empresa do departamento ao vincular
+- Progresso deve estar entre 0 e 100
+- Vínculos duplicados entre trilha e departamento são impedidos
+- Matrículas duplicadas para o mesmo usuário e trilha são impedidas
 
-## 📊 Example Usage Flow
+## 📊 Fluxo de Uso Típico
 
-1. **Create a company**
+1. **Criar uma empresa**
 ```bash
 POST /api/v1/companies
 {
-  "name": "My Company",
-  "corporate_domain": "mycompany.com",
+  "name": "Minha Empresa",
+  "corporate_domain": "minhaempresa.com.br",
   "plan": "enterprise"
 }
 ```
 
-2. **Create departments**
+2. **Criar departamentos**
 ```bash
 POST /api/v1/departments
 {
   "company_id": 1,
-  "name": "Sales",
-  "description": "Sales team"
+  "name": "Vendas",
+  "description": "Equipe de vendas"
 }
 ```
 
-3. **Create a learning path**
+3. **Criar uma trilha de aprendizado**
 ```bash
 POST /api/v1/learning-paths
 {
   "company_id": 1,
-  "title": "Business English",
+  "title": "Inglês para Negócios",
   "language": "english",
   "level": "intermediate"
 }
 ```
 
-4. **Assign learning path to department**
+4. **Vincular trilha ao departamento**
 ```bash
 POST /api/v1/learning-paths/1/departments/1
 ```
 
-5. **Create users in the department**
+5. **Criar usuários no departamento**
 ```bash
 POST /api/v1/users
 {
   "company_id": 1,
   "department_id": 1,
-  "full_name": "John Doe",
-  "email": "john@mycompany.com",
+  "full_name": "João Silva",
+  "email": "joao@minhaempresa.com.br",
   "role": "employee"
 }
 ```
 
-6. **Auto-enroll all department users**
+6. **Matricular automaticamente todos os usuários do departamento**
 ```bash
 POST /api/v1/enrollments/departments/1/auto-enroll-users
 ```
 
-## 🧪 Testing
+## 🧪 Testes
 
-You can test the API using:
+Você pode testar a API usando:
 
 1. **Swagger UI**: http://localhost:8000/docs
-2. **Postman/Insomnia**: Import the OpenAPI spec from http://localhost:8000/openapi.json
-3. **cURL**: Command-line HTTP requests
-4. **Python requests**: Write integration tests
+2. **Postman/Insomnia**: Importe a spec OpenAPI de http://localhost:8000/openapi.json
+3. **cURL**: Requisições HTTP via linha de comando
+4. **Python requests**: Escreva testes de integração
 
-## 🔄 Database Migrations (Optional)
+## 🔄 Migrações de Banco de Dados (Opcional)
 
-If you need to modify the database schema:
+Para modificar o schema do banco:
 
 ```bash
-# Create a new migration
-alembic revision --autogenerate -m "Description of changes"
+# Criar nova migração
+alembic revision --autogenerate -m "Descrição das mudanças"
 
-# Apply migrations
+# Aplicar migrações
 alembic upgrade head
 
-# Rollback migrations
+# Reverter migrações
 alembic downgrade -1
 ```
 
-## 📁 Project Structure
+## 📁 Estrutura do Projeto
 
 ```
 backend/
 ├── app/
 │   ├── __init__.py
-│   ├── main.py                 # FastAPI application entry point
+│   ├── main.py                 # Ponto de entrada da aplicação FastAPI
 │   ├── core/
-│   │   ├── config.py          # Configuration settings
-│   │   ├── database.py        # Database connection
-│   │   └── dependencies.py    # Dependency injection
-│   ├── models/                # SQLAlchemy models
+│   │   ├── config.py          # Configurações da aplicação
+│   │   ├── database.py        # Conexão com o banco de dados
+│   │   └── dependencies.py    # Injeção de dependências
+│   ├── models/                # Modelos SQLAlchemy
 │   │   ├── company.py
 │   │   ├── department.py
 │   │   ├── user.py
@@ -308,14 +309,14 @@ backend/
 │   │   ├── learning_path_department.py
 │   │   ├── content.py
 │   │   └── enrollment.py
-│   ├── schemas/               # Pydantic schemas
+│   ├── schemas/               # Schemas Pydantic
 │   │   ├── company.py
 │   │   ├── department.py
 │   │   ├── user.py
 │   │   ├── learning_path.py
 │   │   ├── content.py
 │   │   └── enrollment.py
-│   ├── crud/                  # CRUD operations
+│   ├── crud/                  # Operações CRUD
 │   │   ├── company.py
 │   │   ├── department.py
 │   │   ├── user.py
@@ -324,7 +325,7 @@ backend/
 │   │   ├── content.py
 │   │   └── enrollment.py
 │   ├── api/
-│   │   └── v1/               # API version 1 routes
+│   │   └── v1/               # Rotas da API versão 1
 │   │       ├── router.py
 │   │       ├── company.py
 │   │       ├── department.py
@@ -334,43 +335,43 @@ backend/
 │   │       ├── enrollment.py
 │   │       └── report.py
 │   └── utils/
-│       └── seed.py           # Database seeding script
-├── alembic/                  # Database migrations
+│       └── seed.py           # Script de população do banco
+├── alembic/                  # Migrações do banco de dados
 │   ├── versions/
 │   └── env.py
-├── alembic.ini              # Alembic configuration
-├── requirements.txt         # Python dependencies
-├── .env                     # Environment variables
-├── .env.example            # Environment variables template
-├── .gitignore              # Git ignore rules
-├── run.py                  # Application runner
-└── README.md              # This file
+├── alembic.ini              # Configuração do Alembic
+├── requirements.txt         # Dependências Python
+├── .env                     # Variáveis de ambiente
+├── .env.example            # Modelo de variáveis de ambiente
+├── .gitignore              # Regras do Git ignore
+├── run.py                  # Inicializador da aplicação
+└── README.md              # Este arquivo
 ```
 
-## 🌟 Key Features Details
+## 🌟 Detalhes das Funcionalidades
 
-### Auto-Enrollment
-When you assign a learning path to a department and want to enroll all existing users, use the auto-enrollment endpoint:
+### Matrícula Automática
+Para matricular todos os usuários existentes de um departamento em uma trilha, use o endpoint de matrícula automática:
 ```
 POST /api/v1/enrollments/departments/{department_id}/auto-enroll-users
 ```
 
-### Progress Tracking
-Each enrollment tracks:
-- Progress percentage (0-100)
-- Status (not_started, in_progress, completed, cancelled)
-- Start and completion dates
+### Acompanhamento de Progresso
+Cada matrícula registra:
+- Percentual de progresso (0–100)
+- Status (`not_started`, `in_progress`, `completed`, `cancelled`)
+- Datas de início e conclusão
 
-### Reports
-Comprehensive reporting system:
-- Department progress overview
-- Learning paths by department
-- User enrollments by learning path
-- Company-wide overview
+### Relatórios
+Sistema de relatórios completo:
+- Visão geral do progresso por departamento
+- Trilhas por departamento
+- Usuários matriculados por trilha
+- Visão geral da empresa
 
-## 🔐 Environment Configuration
+## 🔐 Configuração de Ambiente
 
-The `.env` file contains:
+O arquivo `.env` contém:
 
 ```env
 DATABASE_URL=sqlite:///./flueent.db
@@ -380,20 +381,20 @@ DEBUG=True
 CORS_ORIGINS=http://localhost:3000,http://localhost:8080
 ```
 
-For production, change:
+Para produção, altere:
 - `DEBUG=False`
-- Use PostgreSQL or MySQL instead of SQLite
-- Update CORS_ORIGINS to your frontend domain
-- Add security configurations
+- Use PostgreSQL ou MySQL no lugar do SQLite
+- Atualize `CORS_ORIGINS` para o domínio do seu frontend
+- Adicione configurações de segurança adicionais
 
-## 📝 License
+## 📝 Licença
 
-This project is licensed under the MIT License.
+Este projeto está licenciado sob a Licença MIT.
 
-## 👥 Support
+## 👥 Suporte
 
-For questions or support, please open an issue in the repository.
+Para dúvidas ou suporte, abra uma issue no repositório.
 
 ---
 
-**Built with ❤️ using FastAPI**
+**Desenvolvido com ❤️ usando FastAPI**
