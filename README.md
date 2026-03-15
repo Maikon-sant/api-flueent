@@ -10,7 +10,10 @@ Plataforma de aprendizado de idiomas com inteligência artificial construída co
 
 ## 🌐 Teste a API Online
 
-**🚀 API em Produção:** https://api.simplificagov.com/
+**🚀 API em Produção:** 
+https://api.simplificagov.com/
+https://api.simplificagov.com/docs/
+https://api.simplificagov.com:8080
 
 Você pode testar a API sem instalar nada localmente! Acesse:
 
@@ -38,10 +41,7 @@ Você pode testar a API sem instalar nada localmente! Acesse:
 - **Acompanhamento de Progresso**: Registro detalhado de melhorias e dificuldades
 
 ### 💾 **Multi-Database**
-- **SQLite**: Desenvolvimento e testes rápidos
-- **PostgreSQL**: Produção escalável
-- **MySQL**: Alternativa robusta para produção
-- **UUID**: Chaves primárias universais entre diferentes bancos
+- **MySQL**:
 
 ### 🔌 **API RESTful Completa**
 - Documentação automática com Swagger UI e ReDoc
@@ -516,21 +516,6 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 
 ---
 
-## 👨‍💻 Autor
-
-Desenvolvido com ❤️ para revolucionar o aprendizado de idiomas com IA
-
----
-
-## 🙏 Agradecimentos
-
-- [FastAPI](https://fastapi.tiangolo.com/) - Framework web incrível
-- [Ollama](https://ollama.ai/) - IA local e poderosa
-- [SQLAlchemy](https://www.sqlalchemy.org/) - ORM robusto
-- [Pydantic](https://pydantic-docs.helpmanual.io/) - Validação de dados
-
----
-
 **🚀 Pronto para começar?**
 
 - **Teste online:** https://api.simplificagov.com/docs
@@ -627,11 +612,3 @@ Para produção, altere:
 ## 📝 Licença
 
 Este projeto está licenciado sob a Licença MIT.
-
-## 👥 Suporte
-
-Para dúvidas ou suporte, abra uma issue no repositório.
-
----
-
-**Desenvolvido com ❤️ usando FastAPI**
