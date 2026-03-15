@@ -1,33 +1,22 @@
 from sqlalchemy.orm import Session
-from typing import List, Optional
 from app.models.user import User
 from app.schemas.user import UserCreate, UserUpdate
+from uuid import UUID
 
 
-def get_user(db: Session, user_id: int) -> Optional[User]:
+def get_user(db: Session, user_id: UUID):
     return db.query(User).filter(User.id == user_id).first()
 
 
-def get_user_by_email(db: Session, email: str) -> Optional[User]:
+def get_user_by_email(db: Session, email: str):
     return db.query(User).filter(User.email == email).first()
 
 
-def get_users(
-    db: Session, 
-    skip: int = 0, 
-    limit: int = 100,
-    company_id: Optional[int] = None,
-    department_id: Optional[int] = None
-) -> List[User]:
-    query = db.query(User)
-    if company_id:
-        query = query.filter(User.company_id == company_id)
-    if department_id:
-        query = query.filter(User.department_id == department_id)
-    return query.offset(skip).limit(limit).all()
+def get_users(db: Session, skip: int = 0, limit: int = 100):
+    return db.query(User).offset(skip).limit(limit).all()
 
 
-def create_user(db: Session, user: UserCreate) -> User:
+def create_user(db: Session, user: UserCreate):
     db_user = User(**user.model_dump())
     db.add(db_user)
     db.commit()
@@ -35,7 +24,7 @@ def create_user(db: Session, user: UserCreate) -> User:
     return db_user
 
 
-def update_user(db: Session, user_id: int, user: UserUpdate) -> Optional[User]:
+def update_user(db: Session, user_id: UUID, user: UserUpdate):
     db_user = get_user(db, user_id)
     if not db_user:
         return None
@@ -49,11 +38,10 @@ def update_user(db: Session, user_id: int, user: UserUpdate) -> Optional[User]:
     return db_user
 
 
-def delete_user(db: Session, user_id: int) -> bool:
+def delete_user(db: Session, user_id: UUID):
     db_user = get_user(db, user_id)
-    if not db_user:
-        return False
-    
-    db.delete(db_user)
-    db.commit()
-    return True
+    if db_user:
+        db.delete(db_user)
+        db.commit()
+        return True
+    return False

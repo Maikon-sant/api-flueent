@@ -6,3 +6,15 @@ pydantic-settings==2.1.0
 alembic==1.13.1
 python-dotenv==1.0.0
 python-multipart==0.0.6
+httpx==0.26.0  # Para comunicação com Ollama
+
+# Database Drivers (instale o que for usar)
+# PostgreSQL
+psycopg2-binary==2.9.9
+
+# MySQL
+pymysql==1.1.0
+cryptography==41.0.7  # Necessário para pymysql
+
+# ou use mysqlclient (mais rápido, mas requer compilação)
+# mysqlclient==2.2.0

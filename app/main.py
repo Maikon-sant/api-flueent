@@ -1,24 +1,24 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from sqlalchemy import func
 from app.core.config import settings
-from app.core.database import engine, get_db, SessionLocal
-from app.models import company, department, user, learning_path, learning_path_department, content, enrollment
+from app.core.database import engine, Base
+from app.models import (
+    user,
+    user_language_profile,
+    session,
+    session_plan,
+    session_plan_item,
+    coach_memory
+)
 from app.api.v1.router import api_router
 
 # Create all tables
-company.Base.metadata.create_all(bind=engine)
-department.Base.metadata.create_all(bind=engine)
-user.Base.metadata.create_all(bind=engine)
-learning_path.Base.metadata.create_all(bind=engine)
-learning_path_department.Base.metadata.create_all(bind=engine)
-content.Base.metadata.create_all(bind=engine)
-enrollment.Base.metadata.create_all(bind=engine)
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
     title=settings.APP_NAME,
     version=settings.APP_VERSION,
-    description="Corporate Language Learning Platform API - A SaaS B2B solution for managing language learning paths by company departments",
+    description="Flueet - AI-powered language learning platform with personalized coaching",
     docs_url="/docs",
     openapi_url="/openapi.json"
 )
@@ -42,10 +42,22 @@ def read_root():
     Root endpoint with API information.
     """
     return {
-        "message": "Welcome to Flueent API",
+        "message": "Welcome to Flueet API",
         "version": settings.APP_VERSION,
         "docs": "/docs",
-        "openapi": "/openapi.json"
+        "openapi": "/openapi.json",
+        "description": "AI-powered language learning platform"
+    }
+
+
+@app.get("/health", tags=["Health"])
+def health_check():
+    """
+    Health check endpoint.
+    """
+    return {
+        "status": "healthy",
+        "version": settings.APP_VERSION
     }
 
 

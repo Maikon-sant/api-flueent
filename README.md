@@ -1,57 +1,93 @@
-# Flueent API - Plataforma de Aprendizado de Idiomas Corporativo
+# 🚀 Flueet API - AI-Powered Language Learning Platform
 
-API backend completa construída com FastAPI para uma plataforma B2B SaaS de aprendizado de idiomas corporativo. O sistema foca em organizar colaboradores por departamentos e atribuir trilhas de aprendizado específicas a cada departamento.
+Plataforma de aprendizado de idiomas com inteligência artificial construída com FastAPI. Sistema completo com memória de coach personalizada, geração de feedback automático e acompanhamento detalhado de progresso.
 
-## 🚀 Funcionalidades
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.109.0-009688.svg)](https://fastapi.tiangolo.com)
 
-- **Gestão Multi-empresa**: Suporte a múltiplas empresas com diferentes planos de assinatura
-- **Organização por Departamentos**: Organize colaboradores por departamentos/setores
-- **Trilhas de Aprendizado**: Crie e gerencie trilhas de aprendizado de idiomas com múltiplos conteúdos
-- **Associação Departamento-Trilha**: Vincule trilhas de aprendizado a departamentos específicos
-- **Matrícula de Usuários**: Matricule usuários em trilhas com acompanhamento de progresso
-- **Matrícula Automática**: Matricule automaticamente todos os usuários de um departamento nas trilhas atribuídas
-- **Relatórios Completos**: Acompanhe o progresso por departamento, trilha e empresa
-- **API RESTful**: Operações CRUD completas para todas as entidades
-- **Documentação Automática**: Swagger UI e especificação OpenAPI
-- **Migrações de Banco**: Suporte ao Alembic para versionamento de schema
+---
+
+## ✨ Funcionalidades Principais
+
+### 🤖 **IA Coach Personalizada**
+- **Feedback Inteligente**: Geração automática de feedback usando IA local (Ollama)
+- **Memória do Coach**: Sistema de memória persistente que aprende com cada sessão
+- **Análise de Erros**: Detecção e categorização automática de erros recorrentes
+- **Recomendações Personalizadas**: Sugestões de estudo baseadas no histórico do aluno
+
+### 📊 **Gestão de Aprendizado**
+- **Perfis Multi-idioma**: Usuários podem ter múltiplos perfis de aprendizado
+- **Sessões Variadas**: Diagnóstico, pronúncia, vocabulário, conversação livre
+- **Planos de Estudo**: Geração de planos personalizados baseados em diagnóstico
+- **Acompanhamento de Progresso**: Registro detalhado de melhorias e dificuldades
+
+### 💾 **Multi-Database**
+- **SQLite**: Desenvolvimento e testes rápidos
+- **PostgreSQL**: Produção escalável
+- **MySQL**: Alternativa robusta para produção
+- **UUID**: Chaves primárias universais entre diferentes bancos
+
+### 🔌 **API RESTful Completa**
+- Documentação automática com Swagger UI e ReDoc
+- Validação de dados com Pydantic
+- CORS configurável
+- Health checks e estatísticas
+
+---
 
 ## 🛠️ Stack de Tecnologias
 
-- **Python 3.11+**
-- **FastAPI** - Framework web moderno para construção de APIs
-- **SQLAlchemy** - ORM e toolkit SQL
-- **Pydantic** - Validação de dados usando type annotations do Python
-- **Alembic** - Ferramenta de migração de banco de dados
-- **SQLite** - Banco de dados padrão (facilmente substituível por PostgreSQL/MySQL)
-- **Uvicorn** - Servidor ASGI
-- **python-dotenv** - Gerenciamento de variáveis de ambiente
+**Backend:**
+- **FastAPI 0.109.0** - Framework web moderno e performático
+- **SQLAlchemy 2.0.25** - ORM com suporte a múltiplos bancos
+- **Pydantic 2.5.3** - Validação de dados e serialização
+
+**IA & Machine Learning:**
+- **Ollama** - IA local para geração de feedback (LLaMA 3.2)
+- **httpx** - Cliente HTTP assíncrono para comunicação com Ollama
+
+**Banco de Dados:**
+- **SQLite** - Banco padrão para desenvolvimento
+- **PostgreSQL** - Suporte via psycopg2-binary
+- **MySQL** - Suporte via pymysql + cryptography
+
+**Ferramentas:**
+- **Alembic** - Migrações de banco de dados
+- **Uvicorn** - Servidor ASGI de alta performance
+- **python-dotenv** - Gerenciamento de configuração
+
+---
 
 ## 📋 Pré-requisitos
 
-- Python 3.11 ou superior
-- pip (gerenciador de pacotes do Python)
-- Git (para controle de versão)
+- **Python 3.11+**
+- **pip** (gerenciador de pacotes)
+- **Ollama** (opcional, para feedback com IA)
+- **MySQL/PostgreSQL** (opcional, para produção)
 
-## 🔧 Instalação
+---
+
+## 🚀 Instalação Rápida
 
 ### 1. Clone o repositório
 
 ```bash
 git clone <url-do-repositorio>
-cd api-flueent/backend
+cd api-flueent
 ```
 
-### 2. Crie um ambiente virtual
+### 2. Crie e ative o ambiente virtual
 
 **Windows:**
-```bash
-py -3.11 -m venv .venv
+```powershell
+python -m venv .venv
 .venv\Scripts\activate
 ```
 
 **Linux/Mac:**
 ```bash
-python3.11 -m venv .venv
+python -m venv .venv
 source .venv/bin/activate
 ```
 
@@ -59,245 +95,428 @@ source .venv/bin/activate
 
 ```bash
 pip install -r requirements.txt
-pip install email-validator
 ```
 
-### 4. Configure as variáveis de ambiente
+### 4. Configure o banco de dados
 
-O arquivo `.env` já vem configurado com valores padrão. Altere se necessário:
+**Para desenvolvimento (SQLite - padrão):**
+```bash
+# Criar tabelas
+python init_db.py
+```
+
+**Para produção (MySQL):**
+```bash
+# Ver instruções em MYSQL_SETUP.md
+```
+
+**Para produção (PostgreSQL):**
+```bash
+# Ver instruções em DATABASE_SETUP.md
+```
+
+### 5. Configure variáveis de ambiente
+
+Crie um arquivo `.env` (ou use o padrão):
 
 ```env
-DATABASE_URL=sqlite:///./flueent.db
-APP_NAME=Flueent API
+# Banco de Dados (escolha um)
+DATABASE_URL=sqlite:///./flueent.db                                      # SQLite
+# DATABASE_URL=postgresql://user:password@localhost/flueent_db          # PostgreSQL
+# DATABASE_URL=mysql+pymysql://user:password@localhost/flueent_db       # MySQL
+
+# Aplicação
+APP_NAME=Flueet API
 APP_VERSION=1.0.0
 DEBUG=True
 CORS_ORIGINS=http://localhost:3000,http://localhost:8080
 ```
 
-### 5. Popular o banco de dados
-
-Popule o banco com dados de exemplo:
-
-```bash
-python -m app.utils.seed
-```
-
-Isso criará:
-- 1 empresa (TechCorp International)
-- 4 departamentos (Vendas, TI, RH, Marketing)
-- 6 usuários distribuídos entre os departamentos
-- 3 trilhas de aprendizado
-- Múltiplos itens de conteúdo
-- Matrículas de exemplo com acompanhamento de progresso
-
-## 🚀 Executando a Aplicação
-
-### Iniciar o servidor de desenvolvimento
+### 6. Inicie o servidor
 
 ```bash
 python run.py
 ```
 
-Ou usando o uvicorn diretamente:
-
+Ou usando uvicorn diretamente:
 ```bash
 uvicorn app.main:app --reload
 ```
 
-A API estará disponível em: **http://localhost:8000**
+**✅ API disponível em:** http://localhost:8000  
+**📚 Documentação:** http://localhost:8000/docs
 
-## 📚 Documentação da API
+---
 
-Com o servidor rodando, acesse:
+## 🤖 Setup da IA (Opcional)
 
-- **Swagger UI**: http://localhost:8000/docs
-- **ReDoc**: http://localhost:8000/redoc
-- **OpenAPI JSON**: http://localhost:8000/openapi.json
+Para habilitar feedback inteligente com IA:
+
+### 1. Instale o Ollama
+
+- **Windows**: https://ollama.ai/download/windows
+- **Linux**: `curl -fsSL https://ollama.com/install.sh | sh`
+- **macOS**: `brew install ollama`
+
+### 2. Baixe o modelo
+
+```bash
+ollama pull llama3.2
+```
+
+### 3. Inicie o serviço
+
+```bash
+ollama serve
+```
+
+### 4. Teste o endpoint
+
+```bash
+curl http://localhost:8000/api/v1/feedback/health
+```
+
+📖 **Documentação completa**: [OLLAMA_SETUP.md](OLLAMA_SETUP.md)
+
+---
 
 ## 📡 Endpoints da API
 
-### Entidades Principais
+### 🏠 **Geral**
+- `GET /` - Informações da API
+- `GET /health` - Health check
+- `GET /docs` - Documentação Swagger UI
+- `GET /redoc` - Documentação ReDoc
 
-#### Empresas
-- `POST /api/v1/companies` - Criar nova empresa
-- `GET /api/v1/companies` - Listar todas as empresas
-- `GET /api/v1/companies/{id}` - Buscar empresa por ID
-- `PUT /api/v1/companies/{id}` - Atualizar empresa
-- `DELETE /api/v1/companies/{id}` - Excluir empresa
-
-#### Departamentos
-- `POST /api/v1/departments` - Criar novo departamento
-- `GET /api/v1/departments` - Listar todos os departamentos
-- `GET /api/v1/departments/{id}` - Buscar departamento por ID
-- `PUT /api/v1/departments/{id}` - Atualizar departamento
-- `DELETE /api/v1/departments/{id}` - Excluir departamento
-- `GET /api/v1/departments/{id}/learning-paths` - Trilhas de aprendizado do departamento
-
-#### Usuários
-- `POST /api/v1/users` - Criar novo usuário
-- `GET /api/v1/users` - Listar todos os usuários
-- `GET /api/v1/users/{id}` - Buscar usuário por ID
+### 👤 **Usuários**
+- `POST /api/v1/users/` - Criar usuário
+- `GET /api/v1/users/` - Listar usuários
+- `GET /api/v1/users/{id}` - Buscar usuário
 - `PUT /api/v1/users/{id}` - Atualizar usuário
-- `DELETE /api/v1/users/{id}` - Excluir usuário
-- `GET /api/v1/users/{id}/enrollments` - Matrículas do usuário
+- `DELETE /api/v1/users/{id}` - Deletar usuário
 
-#### Trilhas de Aprendizado
-- `POST /api/v1/learning-paths` - Criar nova trilha
-- `GET /api/v1/learning-paths` - Listar todas as trilhas
-- `GET /api/v1/learning-paths/{id}` - Buscar trilha por ID
-- `PUT /api/v1/learning-paths/{id}` - Atualizar trilha
-- `DELETE /api/v1/learning-paths/{id}` - Excluir trilha
-- `POST /api/v1/learning-paths/{lp_id}/departments/{dept_id}` - Vincular trilha a departamento
-- `DELETE /api/v1/learning-paths/{lp_id}/departments/{dept_id}` - Desvincular trilha de departamento
-- `GET /api/v1/learning-paths/{id}/departments` - Departamentos da trilha
+### 🌍 **Perfis de Idioma**
+- `POST /api/v1/user-language-profiles/` - Criar perfil
+- `GET /api/v1/user-language-profiles/` - Listar perfis
+- `GET /api/v1/user-language-profiles/{id}` - Buscar perfil
+- `PUT /api/v1/user-language-profiles/{id}` - Atualizar perfil
+- `DELETE /api/v1/user-language-profiles/{id}` - Deletar perfil
 
-#### Conteúdos
-- `POST /api/v1/contents` - Criar novo conteúdo
-- `GET /api/v1/contents` - Listar todos os conteúdos
-- `GET /api/v1/contents/{id}` - Buscar conteúdo por ID
-- `PUT /api/v1/contents/{id}` - Atualizar conteúdo
-- `DELETE /api/v1/contents/{id}` - Excluir conteúdo
+### 🎯 **Sessões**
+- `POST /api/v1/sessions/` - Criar sessão
+- `GET /api/v1/sessions/` - Listar sessões
+- `GET /api/v1/sessions/{id}` - Buscar sessão
+- `PUT /api/v1/sessions/{id}` - Atualizar sessão
+- `DELETE /api/v1/sessions/{id}` - Deletar sessão
 
-#### Matrículas
-- `POST /api/v1/enrollments` - Criar nova matrícula
-- `GET /api/v1/enrollments` - Listar todas as matrículas
-- `GET /api/v1/enrollments/{id}` - Buscar matrícula por ID
-- `PUT /api/v1/enrollments/{id}` - Atualizar matrícula
-- `DELETE /api/v1/enrollments/{id}` - Excluir matrícula
-- `GET /api/v1/enrollments/departments/{id}/enrollments` - Matrículas do departamento
-- `POST /api/v1/enrollments/departments/{id}/auto-enroll-users` - Matrícula automática do departamento
+### 📅 **Planos de Estudo**
+- `POST /api/v1/session-plans/` - Criar plano
+- `GET /api/v1/session-plans/` - Listar planos
+- `GET /api/v1/session-plans/{id}` - Buscar plano
+- `PUT /api/v1/session-plans/{id}` - Atualizar plano
+- `DELETE /api/v1/session-plans/{id}` - Deletar plano
 
-#### Relatórios
-- `GET /api/v1/reports/departments/{id}/progress` - Relatório de progresso do departamento
-- `GET /api/v1/reports/departments/{id}/learning-paths` - Trilhas do departamento
-- `GET /api/v1/reports/learning-paths/{id}/users` - Usuários por trilha
-- `GET /api/v1/reports/company-overview` - Visão geral da empresa
+### 📋 **Itens do Plano**
+- `POST /api/v1/session-plan-items/` - Criar item
+- `GET /api/v1/session-plan-items/` - Listar itens
+- `GET /api/v1/session-plan-items/{id}` - Buscar item
+- `PUT /api/v1/session-plan-items/{id}` - Atualizar item
+- `DELETE /api/v1/session-plan-items/{id}` - Deletar item
 
-### Endpoints Utilitários
+### 🧠 **Coach Memory**
+- `POST /api/v1/coach-memory/` - Criar memória
+- `GET /api/v1/coach-memory/` - Listar memórias
+- `GET /api/v1/coach-memory/{id}` - Buscar memória
+- `PUT /api/v1/coach-memory/{id}` - Atualizar memória
+- `DELETE /api/v1/coach-memory/{id}` - Deletar memória
 
-- `GET /` - Endpoint raiz com informações da API
-- `GET /health` - Verificação de saúde
-- `GET /stats` - Estatísticas gerais da plataforma
+### 🤖 **Feedback com IA**
+- `POST /api/v1/feedback/generate` - Gerar feedback personalizado
+- `GET /api/v1/feedback/health` - Verificar status da IA
+
+📖 **Documentação completa**: [FEEDBACK_API.md](FEEDBACK_API.md)
+
+---
 
 ## 🗄️ Schema do Banco de Dados
 
-### Entidades Principais
+### **Estrutura de 6 Tabelas**
 
-1. **Company** - Empresas que utilizam a plataforma
-2. **Department** - Departamentos dentro de cada empresa
-3. **User** - Colaboradores vinculados a departamentos
-4. **LearningPath** - Cursos de aprendizado de idiomas
-5. **LearningPathDepartment** - Associação entre trilhas e departamentos
-6. **Content** - Itens de conteúdo dentro das trilhas
-7. **Enrollment** - Matrículas de usuários nas trilhas
+```
+┌──────────────┐
+│    users     │
+│ ─────────────│
+│ id (UUID)    │◄─┐
+│ name         │  │
+│ email        │  │
+│ created_at   │  │
+└──────────────┘  │
+                  │
+┌─────────────────────────┐
+│ user_language_profiles  │
+│ ────────────────────────│
+│ id (UUID)               │◄─┐
+│ user_id (FK)            │──┘
+│ native_language         │
+│ target_language         │
+│ current_level           │
+│ goal                    │
+└─────────────────────────┘
+    ▲                ▲
+    │                │
+    │                ├─────────────────────┐
+    │                │                     │
+┌───┴────────┐  ┌────┴─────────┐  ┌───────┴───────┐
+│  sessions  │  │session_plans │  │ coach_memory  │
+│ ───────────│  │ ─────────────│  │ ──────────────│
+│ id         │  │ id           │  │ id            │
+│ profile_id │  │ profile_id   │  │ profile_id    │
+│ type       │  │ plan_json    │  │ memory_md     │
+│ errors     │  │ completed_at │  │ next_focus    │
+│ feedback   │  └──────────────┘  └───────────────┘
+└────────────┘
+             ┌─────────────────────┐
+             │ session_plan_items  │
+             │ ────────────────────│
+             │ id                  │
+             │ plan_id (FK)        │
+             │ order_index         │
+             │ title               │
+             │ unlocked            │
+             └─────────────────────┘
+```
 
-### Relacionamentos
+### **Tabelas Principais**
 
-- Empresa → Departamentos (1:N)
-- Empresa → Usuários (1:N)
-- Empresa → Trilhas de Aprendizado (1:N)
-- Departamento → Usuários (1:N)
-- Trilha → Conteúdos (1:N)
-- Trilha ↔ Departamentos (N:M)
-- Usuário ↔ Trilhas (N:M via Matrículas)
+1. **users** - Perfil base do usuário
+2. **user_language_profiles** - Perfis de aprendizado (um usuário pode ter vários)
+3. **sessions** - Sessões de prática/conversação
+4. **session_plans** - Planos de estudo personalizados
+5. **session_plan_items** - Itens individuais dos planos
+6. **coach_memory** - Memória persistente da IA para cada perfil
 
-## 🔒 Regras de Negócio e Validações
+### **Relacionamentos**
+- User → Language Profiles (1:N)
+- Language Profile → Sessions (1:N)
+- Language Profile → Session Plans (1:N)
+- Language Profile → Coach Memory (1:1)
+- Session Plan → Plan Items (1:N)
 
-- E-mail do usuário deve ser único
-- Usuário deve pertencer a um departamento (obrigatório)
-- Departamento deve pertencer à mesma empresa do usuário
-- Trilha deve pertencer à mesma empresa do departamento ao vincular
-- Progresso deve estar entre 0 e 100
-- Vínculos duplicados entre trilha e departamento são impedidos
-- Matrículas duplicadas para o mesmo usuário e trilha são impedidas
+---
 
-## 📊 Fluxo de Uso Típico
+## 🎯 Fluxo de Uso Típico
 
-1. **Criar uma empresa**
+### **1. Criar Usuário**
 ```bash
-POST /api/v1/companies
+POST /api/v1/users/
 {
-  "name": "Minha Empresa",
-  "corporate_domain": "minhaempresa.com.br",
-  "plan": "enterprise"
+  "name": "Maria Santos",
+  "email": "maria@example.com"
 }
 ```
 
-2. **Criar departamentos**
+### **2. Criar Perfil de Idioma**
 ```bash
-POST /api/v1/departments
+POST /api/v1/user-language-profiles/
 {
-  "company_id": 1,
-  "name": "Vendas",
-  "description": "Equipe de vendas"
+  "user_id": "uuid-do-usuario",
+  "native_language": "Portuguese",
+  "target_language": "English",
+  "current_level": "B1",
+  "goal": "Business fluency"
 }
 ```
 
-3. **Criar uma trilha de aprendizado**
+### **3. Registrar Sessão de Prática**
 ```bash
-POST /api/v1/learning-paths
+POST /api/v1/sessions/
 {
-  "company_id": 1,
-  "title": "Inglês para Negócios",
-  "language": "english",
-  "level": "intermediate"
+  "user_language_profile_id": "uuid-do-perfil",
+  "session_type": "free_conversation",
+  "duration_seconds": 900,
+  "errors_observed": [
+    {
+      "type": "verb_tense",
+      "example": "I go yesterday (should be 'went')"
+    }
+  ]
 }
 ```
 
-4. **Vincular trilha ao departamento**
+### **4. Gerar Feedback com IA**
 ```bash
-POST /api/v1/learning-paths/1/departments/1
-```
-
-5. **Criar usuários no departamento**
-```bash
-POST /api/v1/users
+POST /api/v1/feedback/generate
 {
-  "company_id": 1,
-  "department_id": 1,
-  "full_name": "João Silva",
-  "email": "joao@minhaempresa.com.br",
-  "role": "employee"
+  "user_language_profile_id": "uuid-do-perfil",
+  "max_sessions": 5
 }
 ```
 
-6. **Matricular automaticamente todos os usuários do departamento**
-```bash
-POST /api/v1/enrollments/departments/1/auto-enroll-users
-```
+---
 
 ## 🧪 Testes
 
-Você pode testar a API usando:
-
-1. **Swagger UI**: http://localhost:8000/docs
-2. **Postman/Insomnia**: Importe a spec OpenAPI de http://localhost:8000/openapi.json
-3. **cURL**: Requisições HTTP via linha de comando
-4. **Python requests**: Escreva testes de integração
-
-## 🔄 Migrações de Banco de Dados (Opcional)
-
-Para modificar o schema do banco:
+### **Scripts de Teste Disponíveis**
 
 ```bash
-# Criar nova migração
-alembic revision --autogenerate -m "Descrição das mudanças"
+# Testar conexão com banco
+python test_db.py
 
-# Aplicar migrações
-alembic upgrade head
+# Testar operações CRUD
+python test_crud.py
 
-# Reverter migrações
-alembic downgrade -1
+# Testar endpoints da API
+python test_api.py
+
+# Testar feedback com IA (requer Ollama)
+python test_feedback.py
 ```
+
+### **Testar via Swagger UI**
+
+Acesse: http://localhost:8000/docs
+
+---
 
 ## 📁 Estrutura do Projeto
 
 ```
-backend/
+api-flueent/
 ├── app/
 │   ├── __init__.py
-│   ├── main.py                 # Ponto de entrada da aplicação FastAPI
+│   ├── main.py                      # App FastAPI principal
+│   ├── api/
+│   │   └── v1/
+│   │       ├── user.py              # Endpoints de usuários
+│   │       ├── user_language_profile.py
+│   │       ├── session.py
+│   │       ├── session_plan.py
+│   │       ├── session_plan_item.py
+│   │       ├── coach_memory.py
+│   │       ├── feedback.py          # Endpoints de IA
+│   │       └── router.py            # Router principal
 │   ├── core/
+│   │   ├── config.py                # Configurações
+│   │   ├── database.py              # Setup do banco
+│   │   ├── db_utils.py              # UUID helper
+│   │   └── dependencies.py          # Dependências
+│   ├── crud/                        # Operações de banco
+│   │   ├── user.py
+│   │   ├── session.py
+│   │   └── ...
+│   ├── models/                      # Modelos SQLAlchemy
+│   │   ├── user.py
+│   │   ├── session.py
+│   │   └── ...
+│   ├── schemas/                     # Schemas Pydantic
+│   │   ├── user.py
+│   │   ├── session.py
+│   │   ├── feedback.py
+│   │   └── ...
+│   └── utils/
+│       └── ai_service.py            # Integração Ollama
+├── alembic/                         # Migrações
+├── tests/                           # Testes
+├── .env                             # Variáveis de ambiente
+├── requirements.txt                 # Dependências
+├── init_db.py                       # Criar tabelas
+├── run.py                           # Iniciar servidor
+├── test_api.py                      # Testes da API
+├── test_crud.py                     # Testes CRUD
+├── test_feedback.py                 # Testes IA
+├── DATABASE_SETUP.md                # Setup PostgreSQL
+├── MYSQL_SETUP.md                   # Setup MySQL
+├── OLLAMA_SETUP.md                  # Setup IA
+├── FEEDBACK_API.md                  # Doc Feedback
+└── README.md                        # Este arquivo
+```
+
+---
+
+## 🔒 Regras de Negócio
+
+- ✅ Email de usuário deve ser único
+- ✅ UUID como chave primária em todas as tabelas
+- ✅ Erros armazenados em JSON para flexibilidade
+- ✅ Coach memory único por perfil de idioma
+- ✅ Sessões vinculadas a perfis, não diretamente a usuários
+- ✅ Relacionamentos com cascade delete configurados
+
+---
+
+## 📝 Variáveis de Ambiente
+
+```env
+# Banco de Dados
+DATABASE_URL=sqlite:///./flueent.db
+
+# Aplicação
+APP_NAME=Flueet API
+APP_VERSION=1.0.0
+DEBUG=True
+
+# CORS
+CORS_ORIGINS=http://localhost:3000,http://localhost:8080
+```
+
+---
+
+## 🔄 Migrações (Alembic)
+
+```bash
+# Criar migração automática
+alembic revision --autogenerate -m "Descrição"
+
+# Aplicar migrações
+alembic upgrade head
+
+# Reverter
+alembic downgrade -1
+```
+
+---
+
+## 📚 Documentação Adicional
+
+- 📖 [DATABASE_SETUP.md](DATABASE_SETUP.md) - Configuração PostgreSQL
+- 🐬 [MYSQL_SETUP.md](MYSQL_SETUP.md) - Configuração MySQL
+- 🤖 [OLLAMA_SETUP.md](OLLAMA_SETUP.md) - Configuração IA
+- 💬 [FEEDBACK_API.md](FEEDBACK_API.md) - API de Feedback
+
+---
+
+## 🤝 Contribuindo
+
+1. Fork o projeto
+2. Crie uma branch (`git checkout -b feature/nova-funcionalidade`)
+3. Commit suas mudanças (`git commit -m 'Adiciona nova funcionalidade'`)
+4. Push para a branch (`git push origin feature/nova-funcionalidade`)  
+5. Abra um Pull Request
+
+---
+
+## 📄 Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+---
+
+## 👨‍💻 Autor
+
+Desenvolvido com ❤️ para revolucionar o aprendizado de idiomas com IA
+
+---
+
+## 🙏 Agradecimentos
+
+- [FastAPI](https://fastapi.tiangolo.com/) - Framework web incrível
+- [Ollama](https://ollama.ai/) - IA local e poderosa
+- [SQLAlchemy](https://www.sqlalchemy.org/) - ORM robusto
+- [Pydantic](https://pydantic-docs.helpmanual.io/) - Validação de dados
+
+---
+
+**🚀 Pronto para começar? Execute `python run.py` e acesse http://localhost:8000/docs**
 │   │   ├── config.py          # Configurações da aplicação
 │   │   ├── database.py        # Conexão com o banco de dados
 │   │   └── dependencies.py    # Injeção de dependências

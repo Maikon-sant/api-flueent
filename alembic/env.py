@@ -12,7 +12,14 @@ from app.core.database import Base
 from app.core.config import settings
 
 # Import all models to ensure they're registered with Base
-from app.models import company, department, user, learning_path, learning_path_department, content, enrollment
+from app.models import (
+    user,
+    user_language_profile,
+    session,
+    session_plan,
+    session_plan_item,
+    coach_memory
+)
 
 # this is the Alembic Config object
 config = context.config
