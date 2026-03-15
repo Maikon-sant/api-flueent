@@ -8,6 +8,21 @@ Plataforma de aprendizado de idiomas com inteligência artificial construída co
 
 ---
 
+## 🌐 Teste a API Online
+
+**🚀 API em Produção:** https://api.simplificagov.com/
+
+Você pode testar a API sem instalar nada localmente! Acesse:
+
+- **📚 Documentação Interativa (Swagger):** https://api.simplificagov.com/docs
+- **📖 Documentação Alternativa (ReDoc):** https://api.simplificagov.com/redoc
+- **✅ Health Check:** https://api.simplificagov.com/health
+- **🤖 Status da IA:** https://api.simplificagov.com/api/v1/feedback/health
+
+> 💡 **Dica:** Use os mesmos endpoints documentados abaixo, apenas substitua `http://localhost:8000` por `https://api.simplificagov.com`
+
+---
+
 ## ✨ Funcionalidades Principais
 
 ### 🤖 **IA Coach Personalizada**
@@ -74,7 +89,7 @@ Plataforma de aprendizado de idiomas com inteligência artificial construída co
 
 ```bash
 git clone <url-do-repositorio>
-cd api-flueent
+cd api-flueet
 ```
 
 ### 2. Crie e ative o ambiente virtual
@@ -381,7 +396,7 @@ Acesse: http://localhost:8000/docs
 ## 📁 Estrutura do Projeto
 
 ```
-api-flueent/
+api-flueet/
 ├── app/
 │   ├── __init__.py
 │   ├── main.py                      # App FastAPI principal
@@ -516,7 +531,10 @@ Desenvolvido com ❤️ para revolucionar o aprendizado de idiomas com IA
 
 ---
 
-**🚀 Pronto para começar? Execute `python run.py` e acesse http://localhost:8000/docs**
+**🚀 Pronto para começar?**
+
+- **Teste online:** https://api.simplificagov.com/docs
+- **Instale localmente:** Execute `python run.py` e acesse http://localhost:8000/docs
 │   │   ├── config.py          # Configurações da aplicação
 │   │   ├── database.py        # Conexão com o banco de dados
 │   │   └── dependencies.py    # Injeção de dependências
@@ -594,7 +612,7 @@ O arquivo `.env` contém:
 
 ```env
 DATABASE_URL=sqlite:///./flueent.db
-APP_NAME=Flueent API
+APP_NAME=Flueet API
 APP_VERSION=1.0.0
 DEBUG=True
 CORS_ORIGINS=http://localhost:3000,http://localhost:8080
