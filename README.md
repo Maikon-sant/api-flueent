@@ -10,10 +10,13 @@ Plataforma de aprendizado de idiomas com inteligência artificial construída co
 
 ## 🌐 Teste a API Online
 
-**🚀 API em Produção:** 
-https://api.simplificagov.com/
-https://api.simplificagov.com/docs/
-https://api.simplificagov.com:8080
+**🚀 API em Produção:**   
+https://api.simplificagov.com/  
+https://api.simplificagov.com/docs/  
+https://api.simplificagov.com:8080  
+
+**🚀 Plataforma Completa:**   
+https://flueet-hack.vercel.app/
 
 Você pode testar a API sem instalar nada localmente! Acesse:
 
